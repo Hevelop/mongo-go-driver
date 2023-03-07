@@ -48,6 +48,10 @@ func (e ConnectionError) Unwrap() error {
 	return e.Wrapped
 }
 
+func (e ConnectionError) Retryable() bool {
+	return true
+}
+
 // ServerSelectionError represents a Server Selection error.
 type ServerSelectionError struct {
 	Desc    description.Topology
@@ -65,6 +69,10 @@ func (e ServerSelectionError) Error() string {
 // Unwrap returns the underlying error.
 func (e ServerSelectionError) Unwrap() error {
 	return e.Wrapped
+}
+
+func (e ServerSelectionError) Retryable() bool {
+	return true
 }
 
 // WaitQueueTimeoutError represents a timeout when requesting a connection from the pool
